@@ -458,4 +458,103 @@ window.submitOrder = submitOrder;
 window.openWhatsApp = openWhatsApp;
 window.openCustomOrder = openCustomOrder;
 window.scrollToOrderForm = scrollToOrderForm;
+
 window.scrollToProducts = scrollToProducts;
+// Modal Functions - Yeh script.js ke end mein add karein
+
+// Open Modal Function
+function openOrderModal() {
+    document.getElementById('orderModal').style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+// Close Modal Function
+function closeOrderModal() {
+    document.getElementById('orderModal').style.display = 'none';
+    document.body.style.overflow = 'auto'; // Enable scrolling
+}
+
+// Pack Selection
+function selectPack(packElement) {
+    // Remove active class from all buttons
+    document.querySelectorAll('.pack-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Add active class to clicked button
+    packElement.classList.add('active');
+    
+    // Update order summary
+    const pack = packElement.getAttribute('data-pack');
+    const price = packElement.getAttribute('data-price');
+    
+    document.getElementById('selectedPack').textContent = `${pack} Desi Mithas Gur`;
+    document.getElementById('packPrice').textContent = `Rs. ${price}`;
+    document.getElementById('totalPrice').textContent = `Rs. ${price}`;
+}
+
+// WhatsApp Order Function
+function sendOrderViaWhatsApp() {
+    const name = document.getElementById('orderName').value.trim();
+    const phone = document.getElementById('orderPhone').value.trim();
+    const address = document.getElementById('orderAddress').value.trim();
+    const pack = document.getElementById('selectedPack').textContent;
+    const price = document.getElementById('packPrice').textContent;
+    
+    // Validation
+    if (!name || !phone || !address) {
+        alert('Please fill in all fields');
+        return;
+    }
+    
+    // WhatsApp Message
+    const message = `🍯 *DESI MITHAS GUR ORDER* 🍯
+
+📦 *Order Details:*
+• ${pack}
+• ${price}
+
+👤 *Customer Information:*
+• Name: ${name}
+• Phone: ${phone}
+• Address: ${address}
+
+⏰ *Order Time:* ${new Date().toLocaleString()}
+
+💰 *Payment:* Cash on Delivery
+🚚 *Delivery:* Within 24 hours`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/923494765335?text=${encodedMessage}`;
+    
+    // Open WhatsApp
+    window.open(whatsappURL, '_blank');
+    
+    // Close modal
+    closeOrderModal();
+    
+    // Reset form
+    document.getElementById('orderName').value = '';
+    document.getElementById('orderPhone').value = '03';
+    document.getElementById('orderAddress').value = '';
+}
+
+// Event Listeners Setup
+document.addEventListener('DOMContentLoaded', function() {
+    // Close modal when clicking X
+    document.querySelector('.close-modal').addEventListener('click', closeOrderModal);
+    
+    // Close modal when clicking outside
+    document.getElementById('orderModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeOrderModal();
+        }
+    });
+    
+    // Pack selection
+    document.querySelectorAll('.pack-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            selectPack(this);
+        });
+    });
+});
