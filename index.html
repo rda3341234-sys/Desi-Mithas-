@@ -553,9 +553,73 @@
     </footer>
 
     <script src="script.js"></script>
+    <!-- Order Form Modal - Yeh code </body> se pehle add karein -->
+<div id="orderModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><i class="fas fa-shopping-cart"></i> Order Desi Mithas Gur</h2>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <!-- Your order form here -->
+            <div class="quick-order-form">
+                <h3>Quick Order Form</h3>
+                
+                <div class="form-group">
+                    <label for="orderName"><i class="fas fa-user"></i> Your Full Name</label>
+                    <input type="text" id="orderName" placeholder="Enter your full name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="orderPhone"><i class="fas fa-phone"></i> WhatsApp Number</label>
+                    <input type="tel" id="orderPhone" placeholder="03XX-XXXXXXX" value="03">
+                </div>
+                
+                <div class="form-group">
+                    <label for="orderAddress"><i class="fas fa-map-marker-alt"></i> Complete Delivery Address</label>
+                    <textarea id="orderAddress" rows="3" placeholder="House# Street# Area, City"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-weight"></i> Select Pack Size</label>
+                    <div class="pack-selector">
+                        <button class="pack-btn" data-pack="500gm" data-price="349">500gm - Rs. 349</button>
+                        <button class="pack-btn active" data-pack="1kg" data-price="699">1kg - Rs. 699</button>
+                        <button class="pack-btn" data-pack="5kg" data-price="3199">5kg - Rs. 3,199</button>
+                    </div>
+                </div>
+                
+                <div class="order-summary">
+                    <div class="summary-item">
+                        <span>Selected Pack:</span>
+                        <span id="selectedPack">1kg Desi Mithas Gur</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Price:</span>
+                        <span id="packPrice">Rs. 699</span>
+                    </div>
+                    <div class="summary-item total">
+                        <span>Total:</span>
+                        <span id="totalPrice">Rs. 699</span>
+                    </div>
+                </div>
+                
+                <button class="whatsapp-order-btn" onclick="sendOrderViaWhatsApp()">
+                    <i class="fab fa-whatsapp"></i> Send Order via WhatsApp
+                </button>
+                
+                <div class="payment-note">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Cash on Delivery Available | Delivery within 24 hours</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>
+
 
 
 
